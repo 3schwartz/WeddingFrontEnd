@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-title>
+    Gæsteliste
+  </mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item
+        *ngFor="let guest of guests | async; last as last"
+        target="_blank"
+      >
+        <h4 mat-line>
+          {{ guest.name }}
+        </h4>
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

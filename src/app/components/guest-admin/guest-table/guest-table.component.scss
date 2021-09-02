@@ -1,0 +1,41 @@
+@import "src/_themeVariables";
+
+$app-send: mat-palette($mat-light-blue, 100, 50, 200);
+$app-attTrue: mat-palette($mat-green, 300, 200, 400);
+$app-attFalse: mat-palette($mat-deep-orange, 300, 200, 400);
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 20px;
+}
+
+.stdSend {
+  background-color: mat-color($app-send, lighter);
+}
+
+.invSend {
+  background-color: mat-color($app-send, default);
+}
+
+.attFalse {
+  background-color: mat-color($app-attFalse, lighter);
+}
+
+.attTrue {
+  background-color: mat-color($app-attTrue, default);
+}
+
+table {
+  width: 90%;
+}
+
+.first-header-row th {
+  border-bottom: none;
+}
+
+.second-header-row {
+  font-style: italic;
+}

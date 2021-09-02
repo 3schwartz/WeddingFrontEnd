@@ -1,0 +1,28 @@
+#registerAddress {
+    display: flex;
+    flex-direction: column;
+    > * {
+      width: 200px;
+    }
+  }
+
+  #updateAddress {
+    display: flex;
+    flex-direction: column;
+    > * {
+      width: 200px;
+    }
+  }
+
+  #registerGuest {
+    display: flex;
+    flex-direction: column;
+    > * {
+      width: 200px;
+    }
+  }
+
+  .guest-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }

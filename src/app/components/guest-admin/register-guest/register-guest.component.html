@@ -1,0 +1,45 @@
+<form id="registerGuest" [formGroup]="registerGuest">
+    <mat-form-field>
+      <mat-label>Navn</mat-label>
+      <input formControlName="name" matInput />
+      <mat-error *ngIf="f.name.hasError('required')"
+        >Navn er nødvendigt</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput />
+      <mat-error *ngIf="f.email.hasError('email')"
+        >E-mail er ugyldig</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="address">
+        <mat-option>Ingen</mat-option>
+        <mat-option *ngFor="let address of addresses" [value]="address">
+          {{ address.homeAddress }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="gueststate">
+        <mat-option>Ingen</mat-option>
+        <mat-option *ngFor="let gueststate of guestStates" [value]="gueststate">
+          {{ gueststate.stateName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="registerGuest.invalid"
+      (click)="addGuest(registerGuest)"
+    >
+      Tilføj
+    </button>
+  </form>

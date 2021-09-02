@@ -1,0 +1,8 @@
+{
+    "/backend" : {
+        "target": "https://schwartzbobachbryllup.dk",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

@@ -1,0 +1,19 @@
+@import "src/_themeVariables";
+
+.alert-success {
+  background-color: mat-color($app-success, default);
+  text-align: center;
+  display: block;
+}
+
+.alert-danger {
+  background-color: mat-color($app-warn, default);
+  text-align: center;
+  display: block;
+}
+
+mat-card {
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+  }

@@ -1,0 +1,5 @@
+@import "src/themeVariables.scss";
+
+// // Create the theme object (a Sass map containing all of the palettes).
+// $app-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);

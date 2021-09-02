@@ -1,0 +1,144 @@
+<mat-card>
+  <mat-card-title>
+    Tilføj ny adresse
+  </mat-card-title>
+  <mat-card-content>
+    <form id="registerAddress" [formGroup]="registerAddress">
+      <mat-form-field>
+        <mat-label>Hjemme adresse</mat-label>
+        <input formControlName="homeAddress" matInput />
+        <mat-error *ngIf="f.homeAddress.hasError('required')"
+          >Addresse er nødvendig</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Gæster ved adressen</mat-label>
+        <mat-select formControlName="guestsAtAdress" multiple>
+          <mat-select-trigger>
+            {{ f.guestsAtAdress.value ? f.guestsAtAdress.value[0].name : "" }}
+            <span
+              *ngIf="f.guestsAtAdress.value?.length > 1"
+              class="guest-selection"
+            >
+              (+{{ f.guestsAtAdress.value.length - 1 }}
+              {{ f.guestsAtAdress.value?.length == 2 ? "anden" : "andre" }})
+            </span>
+          </mat-select-trigger>
+          <mat-option *ngFor="let guest of guests | async" [value]="guest">{{
+            guest.name
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.guestsAtAdress.hasError('required')"
+          >Der skal bo mindst en på adressen</mat-error
+        >
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="registerAddress.invalid"
+        (click)="addAddress(registerAddress)"
+      >
+        Tilføj
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>
+    Opdater adresse
+  </mat-card-title>
+  <mat-card-content>
+    <form id="updateAddress" [formGroup]="updateAddress">
+      <mat-form-field>
+        <mat-label>Adresse der skal opdateres</mat-label>
+        <mat-select
+          formControlName="selectedAddress"
+          (ngModelChange)="changeAddress($event)"
+        >
+          <mat-option
+            *ngFor="let address of addresses | async"
+            [value]="address"
+          >
+            {{ address.homeAddress }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+          {{
+            y.selectedAddress.value ? y.selectedAddress.value.homeAddress : ""
+          }}</mat-label
+        >
+        <input matInput formControlName="updateAddress" />
+        <mat-error *ngIf="y.updateAddress.hasError('required')"
+          >Addresse er nødvendig</mat-error
+        >
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="updateAddress.invalid"
+        (click)="updateAddressInDb()"
+      >
+        Opdater
+      </button>
+      <button
+      mat-stroked-button
+      color="warn"
+      [disabled]="!updateAddress.controls.selectedAddress.value"
+      (click)="deleteAddress()"
+      class="text-danger"
+    >
+      <mat-icon>
+        delete
+      </mat-icon>
+    </button>
+    </form>
+
+    <mat-list>
+      <h3>Personer på addressen</h3>
+      <mat-list-item
+        *ngFor="let guest of guestAtAddress; last as last"
+        target="_blank"
+      >
+        <h4 mat-line>
+          {{ guest.name }}
+        </h4>
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="deleteGuestFromAddress(guest)"
+          class="text-danger"
+        >
+          <mat-icon>
+            delete
+          </mat-icon>
+        </button>
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+    <h3>Tilføj person på adressen</h3>
+
+    <form id="registerGuest" [formGroup]="registerGuest">
+      <mat-form-field>
+        <mat-label>Tilføj gæst</mat-label>
+        <mat-select formControlName="guestToAdd">
+          <mat-option *ngFor="let guest of guests | async" [value]="guest">
+            {{ guest.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="registerGuest.invalid"
+        (click)="addGuestToAddress()"
+      >
+        Tilføj gæst til addresse
+      </button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,20 @@
+#registerWish {
+  display: flex;
+  flex-direction: row;
+  > * {
+    width: 200px;
+    padding: 20px;
+  }
+}
+
+table {
+  width: 100%;
+
+  .align-right {
+      text-align: end;
+  }
+}
+
+.mat-raised-button {
+  min-width: 1%;
+}

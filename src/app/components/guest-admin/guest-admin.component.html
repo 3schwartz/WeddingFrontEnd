@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-title>
+    Tilføj ny gæst
+  </mat-card-title>
+  <mat-card-content>
+    <app-register-guest
+    [addresses]="addresses$ | async"
+    [guestStates]="guestStates$ | async"
+    (guestToAdd)="addGuest($event)"
+    ></app-register-guest>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>
+    Gæsteliste
+  </mat-card-title>
+  <mat-card-content>
+
+    <button
+    mat-raised-button
+      color="accent"
+      (click)="getGuestListAsCsv()"
+    >
+      <mat-icon>
+        cloud_download
+      </mat-icon>
+    </button>
+
+    <br />
+
+    <app-guest-table
+    [addresses]="addresses$ | async"
+    [guestStates]="guestStates$ | async"
+    [guestTableForm]="guestTableForm"
+    (guestToAdd)="updateGuest($event)"
+    (guestIdToDelete)="deleteGuest($event)"
+    >
+    </app-guest-table>
+  </mat-card-content>
+</mat-card>

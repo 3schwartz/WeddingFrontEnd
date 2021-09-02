@@ -1,0 +1,45 @@
+@import "../theme";
+
+mat-toolbar {
+  background-color: mat-color($app-primary, default);
+}
+
+main {
+  padding: 20px;
+  background-color: mat-color($app-primary, 100);
+}
+
+mat-sidenav {
+  background-color: mat-color($app-primary, lighter);
+}
+
+#navigation {
+  // display: flex;
+
+  #navigation-buttons {
+    flex: 2;
+  }
+}
+
+footer {
+  background-color: $primary;
+  padding: 20px;
+  color: white;
+  img {
+    max-height: 40px;
+    width: 40px;
+  }
+
+  & > div {
+    text-align: center;
+    display: block;
+  }
+}
+
+svg#clouds {
+  position: fixed;
+  bottom: -160px;
+  left: -230px;
+  z-index: -10;
+  width: 1920px;
+}

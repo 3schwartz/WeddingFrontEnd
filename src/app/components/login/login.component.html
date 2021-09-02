@@ -1,0 +1,46 @@
+<mat-card>
+<mat-card-title fxLayoutAlign="center">Login</mat-card-title>
+<mat-card-content fxLayoutAlign="center">
+  <form id="loginInForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input formControlName="username" matInput />
+      <mat-error *ngIf="f.username.hasError('required')"
+        >Username is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        formControlName="password"
+        matInput
+        [type]="hide ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>
+          {{ hide ? "visibility_off" : "visibility" }}
+        </mat-icon>
+      </button>
+      <mat-error *ngIf="f.password.hasError('required')"
+        >Password is required</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="loading || loginForm.invalid"
+    >
+      Login
+    </button>
+    <br />
+    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+  </form>
+</mat-card-content>
+</mat-card>

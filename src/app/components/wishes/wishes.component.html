@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-title>
+      Ønskeliste
+    </mat-card-title>
+    <mat-card-content>
+        <table mat-table [dataSource]="wishes" class="mat-elevation-z0">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Navn</th>
+              <th mat-cell *matCellDef="let element" width="40%">
+                {{ element.name }}
+              </th>
+            </ng-container>
+          
+            <ng-container matColumnDef="comment">
+              <th mat-header-cell *matHeaderCellDef>Kommentar</th>
+              <th mat-cell *matCellDef="let element" width="60%">
+                {{ element.url }}
+              </th>
+            </ng-container>
+          
+            <!-- <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef>Pris</th>
+              <th mat-cell *matCellDef="let element" width="20%">
+                {{ element.price }}
+              </th>
+            </ng-container> -->
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+    </mat-card-content>
+  </mat-card>

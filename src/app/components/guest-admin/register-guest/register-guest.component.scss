@@ -1,0 +1,8 @@
+#registerGuest {
+    display: flex;
+    flex-direction: row;
+    > * {
+      width: 200px;
+      padding: 20px;
+    }
+  }

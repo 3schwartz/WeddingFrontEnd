@@ -1,0 +1,119 @@
+<form [formGroup]="guestTableForm">
+  <ng-container formArrayName="guests">
+    <table
+      mat-table
+      [dataSource]="guestsArray.controls"
+      class="mat-elevation-z0"
+    >
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Navn</th>
+        <td mat-cell *matCellDef="let element" [formGroup]="element">
+          <mat-form-field>
+            <input matInput formControlName="name" required />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>E-mail</th>
+        <td mat-cell *matCellDef="let element" [formGroup]="element">
+          <mat-form-field>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="addressId">
+        <th mat-header-cell *matHeaderCellDef>Adresse</th>
+        <td mat-cell *matCellDef="let element" [formGroup]="element">
+          <mat-form-field>
+            <mat-select formControlName="addressId">
+              <mat-option
+                *ngFor="let address of addresses"
+                [value]="address.id"
+              >
+                {{ address.homeAddress }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="guestStateId">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element" [formGroup]="element">
+          <mat-form-field>
+            <mat-select formControlName="guestStateId">
+              <mat-option
+                *ngFor="let guestState of guestStates"
+                [value]="guestState.id"
+              >
+                {{ guestState.stateName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef>Update</th>
+        <td mat-cell *matCellDef="let element" [formGroup]="element">
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="!element.dirty"
+            (click)="updateGuest(element)"
+          >
+            Opdater
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-cell *matCellDef="let element" [formGroup]="element">
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="deleteGuest(element.value.id)"
+          >
+            <mat-icon>
+              delete
+            </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nothing">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+      <ng-container matColumnDef="guestStateId-description">
+        <th mat-header-cell *matHeaderCellDef>{{ getAttending() }}</th>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="first-header-row"
+      ></tr>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'nothing',
+          'nothing',
+          'nothing',
+          'guestStateId-description',
+          'nothing',
+          'nothing'
+        ]"
+        class="second-header-row"
+      ></tr>
+
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [ngClass]="calculateRowClass(row)"
+      ></tr>
+    </table>
+  </ng-container>
+</form>

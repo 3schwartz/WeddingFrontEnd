@@ -1,0 +1,19 @@
+<div
+  *ngIf="message"
+>
+  <mat-card
+  fxFlex="0 1 calc(33.3% - 20px)"
+  fxFlex.lt-md="0 1 calc(50% - 20px)"
+  fxFlex.lt-sm="100%"
+    [ngClass]="{
+      alert: message,
+      'alert-success': message.type === 'success',
+      'alert-danger': message.type === 'error'
+    }"
+  >
+    <mat-card-title>{{ message.type | titlecase }}</mat-card-title>
+    <mat-card-content>
+      {{ message.text }}
+    </mat-card-content>
+  </mat-card>
+</div>
